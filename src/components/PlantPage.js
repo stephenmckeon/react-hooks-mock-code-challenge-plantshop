@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react"
+
+import { searchByAttr } from "../utils/helpers"
+
 import NewPlantForm from "./NewPlantForm"
 import PlantList from "./PlantList"
 import Search from "./Search"
@@ -10,11 +13,7 @@ function PlantPage() {
 
   const toggleFetchTrigger = () => setFetchTrigger(!fetchTrigger)
 
-  const filteredPlants = plants.filter((plant) => {
-    const plantName = plant.name.toLowerCase()
-
-    return plantName.startsWith(search.toLowerCase())
-  })
+  const filteredPlants = searchByAttr(plants, search, "name")
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
