@@ -25,7 +25,10 @@ function PlantPage() {
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
       <Search setSearch={setSearch} />
-      <PlantList plants={filteredPlants} />
+      <PlantList
+        handleUpdatePlant={toggleFetchTrigger}
+        plants={filteredPlants}
+      />
     </main>
   )
 }

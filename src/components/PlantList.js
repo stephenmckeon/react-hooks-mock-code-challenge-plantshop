@@ -1,11 +1,15 @@
 import React from "react"
 import PlantCard from "./PlantCard"
 
-function PlantList({ plants }) {
+function PlantList({ handleUpdatePlant, plants }) {
   return (
     <ul className="cards">
       {plants.map((plant) => (
-        <PlantCard key={plant.id} plant={plant} />
+        <PlantCard
+          key={plant.id}
+          onUpdatePlant={handleUpdatePlant}
+          plant={plant}
+        />
       ))}
     </ul>
   )
