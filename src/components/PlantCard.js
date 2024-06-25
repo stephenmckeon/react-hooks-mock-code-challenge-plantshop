@@ -1,6 +1,7 @@
 import React from "react"
 
 import PlantPrice from "./PlantPrice"
+import PlantStatus from "./PlantStatus"
 
 function PlantCard({ onUpdatePlant, plant: { id, image, name, price } }) {
   return (
@@ -8,11 +9,7 @@ function PlantCard({ onUpdatePlant, plant: { id, image, name, price } }) {
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <PlantPrice onUpdatePlant={onUpdatePlant} id={id} price={price} />
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+      <PlantStatus />
     </li>
   )
 }
