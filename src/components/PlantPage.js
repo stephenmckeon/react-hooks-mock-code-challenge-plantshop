@@ -5,6 +5,7 @@ import Search from "./Search"
 
 function PlantPage() {
   const [plants, setPlants] = useState([])
+  const [searchedPlants, setSearchedPlants] = useState([])
   const [fetchTrigger, setFetchTrigger] = useState(false)
 
   const toggleFetchTrigger = () => setFetchTrigger(!fetchTrigger)
@@ -12,14 +13,17 @@ function PlantPage() {
   useEffect(() => {
     fetch("http://localhost:6001/plants")
       .then((response) => response.json())
-      .then(setPlants)
+      .then((data) => {
+        setPlants(data)
+        setSearchedPlants(data)
+      })
   }, [fetchTrigger])
 
   return (
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
-      <Search />
-      <PlantList plants={plants} />
+      <Search plants={plants} setSearchedPlants={setSearchedPlants} />
+      <PlantList plants={searchedPlants} />
     </main>
   )
 }
