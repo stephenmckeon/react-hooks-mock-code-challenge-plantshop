@@ -1,15 +1,19 @@
 import React, { useState } from "react"
 
+const initialValue = {
+  name: "",
+  image: "",
+  price: 0,
+}
+
 function NewPlantForm({ onAddPlant }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    price: 0,
-  })
+  const [formData, setFormData] = useState(initialValue)
 
   const handleChange = ({ target: { name, value } }) => {
     setFormData({ ...formData, [name]: value })
   }
+
+  const resetForm = () => setFormData(initialValue)
 
   const sanitizeFormData = () => ({
     ...formData,
@@ -25,7 +29,9 @@ function NewPlantForm({ onAddPlant }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(sanitizeFormData()),
-    }).then(onAddPlant)
+    })
+      .then(onAddPlant)
+      .then(resetForm)
   }
 
   return (
@@ -37,12 +43,14 @@ function NewPlantForm({ onAddPlant }) {
           type="text"
           name="name"
           placeholder="Plant name"
+          value={formData.name}
         />
         <input
           onChange={handleChange}
           type="text"
           name="image"
           placeholder="Image URL"
+          value={formData.image}
         />
         <input
           onChange={handleChange}
@@ -50,6 +58,7 @@ function NewPlantForm({ onAddPlant }) {
           name="price"
           step="0.01"
           placeholder="Price"
+          value={formData.price}
         />
         <button type="submit">Add Plant</button>
       </form>
