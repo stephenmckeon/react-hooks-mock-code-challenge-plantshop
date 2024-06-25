@@ -1,18 +1,19 @@
-import React from "react";
+import React from "react"
 
-function PlantCard() {
+import PlantPrice from "./PlantPrice"
+import PlantStatus from "./PlantStatus"
+import PlantDelete from "./PlantDelete"
+
+function PlantCard({ onUpdatePlant, plant: { id, image, name, price } }) {
   return (
     <li className="card">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
+      <PlantPrice onUpdatePlant={onUpdatePlant} id={id} price={price} />
+      <PlantStatus />
+      <PlantDelete id={id} onUpdatePlant={onUpdatePlant} />
     </li>
-  );
+  )
 }
 
-export default PlantCard;
+export default PlantCard

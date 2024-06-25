@@ -135,3 +135,12 @@ input:focus {
     width: calc(20% - 2rem);
   }
 }
+
+.flex {
+  display: flex;
+}
+
+.price {
+  width: 109px;
+  margin-left: 5px;
+}
