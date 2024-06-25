@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-function NewPlantForm() {
+function NewPlantForm({ onAddPlant }) {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
@@ -25,7 +25,7 @@ function NewPlantForm() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(sanitizeFormData()),
-    })
+    }).then(onAddPlant)
   }
 
   return (
