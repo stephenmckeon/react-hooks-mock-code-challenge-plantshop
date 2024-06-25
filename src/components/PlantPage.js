@@ -5,25 +5,28 @@ import Search from "./Search"
 
 function PlantPage() {
   const [plants, setPlants] = useState([])
-  const [searchedPlants, setSearchedPlants] = useState([])
   const [fetchTrigger, setFetchTrigger] = useState(false)
+  const [search, setSearch] = useState("")
 
   const toggleFetchTrigger = () => setFetchTrigger(!fetchTrigger)
+
+  const filteredPlants = plants.filter((plant) => {
+    const plantName = plant.name.toLowerCase()
+
+    return plantName.startsWith(search.toLowerCase())
+  })
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
       .then((response) => response.json())
-      .then((data) => {
-        setPlants(data)
-        setSearchedPlants(data)
-      })
+      .then(setPlants)
   }, [fetchTrigger])
 
   return (
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
-      <Search plants={plants} setSearchedPlants={setSearchedPlants} />
-      <PlantList plants={searchedPlants} />
+      <Search setSearch={setSearch} />
+      <PlantList plants={filteredPlants} />
     </main>
   )
 }

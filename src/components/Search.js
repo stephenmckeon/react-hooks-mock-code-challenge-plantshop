@@ -1,16 +1,8 @@
 import React, { useState } from "react"
 
-function Search({ plants, setSearchedPlants }) {
+function Search({ setSearch }) {
   const handleSearch = (event) => {
-    const searchValue = event.target.value.toLowerCase()
-
-    setSearchedPlants(
-      plants.filter((plant) => {
-        const plantName = plant.name.toLowerCase()
-
-        return plantName.startsWith(searchValue)
-      })
-    )
+    setSearch(event.target.value)
   }
 
   return (
